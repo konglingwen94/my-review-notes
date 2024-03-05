@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		img {	
+		     }
+		div {	
+				text-align:center;
+				position:relative;
+				margin:auto;
+				width:375px;
+				height:500px;
+				overflow:hidden;
+				outline:1px solid red;
+		     }
+		p {	
+				text-align:center;
+				position:absolute;
+				bottom: -16px;
+				right: 10px;
+		     }
+	</style>
+</head>
+<body>
+   <div id="" class="">
+		<img src="fei/1.jpg" height="500"/><p><button>1</button>
+   <button>2</button>
+   <button>3</button>
+   <button>4</button>
+   <button>5</button></p>
+   </div>
+   
+   <script type="text/javascript">
+		var obj = {
+			current:0,
+			listSrc:["fei/1.jpg","fei/2.jpg","fei/3.jpg","fei/4.jpg","fei/5.jpg"]
+		};
+		$("img").click(function (){
+			if (obj.current == obj.listSrc.length-1)
+			{
+				obj.current = 0;
+			}else{
+				obj.current++;
+			}
+				this.src = obj.listSrc[obj.current];
+		});
+		for (var i = 0;i < $("button").length ; i++ )
+		{
+			(function(i){
+				$("button").eq(i).mouseover(function (){
+					$("img").attr("src",obj.listSrc[i]);
+				});
+			})(i)
+		}
+   </script>
+</body>
+</html>

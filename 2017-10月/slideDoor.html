@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		div {	
+				margin:auto;
+				outline:1px solid red;
+				position:relative;
+				height:500px;
+				overflow:hidden;
+		     }
+		img {	
+				position:absolute;
+				width:400px;
+				transition: all 1s;
+		     }
+	</style>
+</head>
+<body>
+	<div id="" class="">
+		
+		<img src="pic/ying2.jpg" />
+		<img src="pic/ying3.jpg" />
+		<img src="pic/ying1.jpg" />
+		<img src="pic/ying4.jpg" />
+		<img src="1.jpg" />
+	</div>
+	<script type="text/javascript">
+	    var box = document.querySelector("div");
+		var imgs = box.querySelectorAll("img");
+		var imgWidth = imgs[0].offsetWidth;
+		var openWidth = 130;
+		box.style.width = imgWidth + openWidth * (imgs.length - 1) + "px";
+		function setImgsPos(){
+				for (var i = 1, len = imgs.length;i < len ; i++ )
+			{
+				imgs[i].style.left = imgWidth + openWidth * (i-1) + "px";
+			}	
+		}
+		setImgsPos();
+		var translate = imgWidth - openWidth;
+		for (var i = 0, j = imgs.length;i < j ; i++ )
+		{
+			(function(i){
+				imgs[i].onmouseover = function (){
+					setImgsPos();
+					for (var j = 1;j <= i;j++)
+					{
+						imgs[j].style.left = parseInt(imgs[j].style.left,10) - translate + "px";
+					}
+				}
+			})(i);
+		}
+	</script>
+</body>
+</html>

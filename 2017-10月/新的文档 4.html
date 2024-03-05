@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery.js" type="text/javascript"></script>
+	<style type="text/css">
+		div:first-child {	
+				background-color:lightgray;
+				height:500px;
+		     }
+		mark{	
+				line-height:normal;
+				font-size:50px;
+				font-family:simsun;
+		     }
+		span.line-box1 {	
+				background-color:pink;
+		     }
+		span.line-box2 {	
+				background-color:orange;
+		     }
+		b.inline-box1 {	
+				background-color:green;
+		     }
+		span {	
+				display:inline-block;
+				line-height:150px;
+				width:100%;
+				position:relative;
+				font-family:microsoft yahei;
+		     }
+		i {	
+				position:absolute;
+				width:100%;
+				outline:1px solid;
+				bottom:0;
+				z-index:1;
+		     }
+		input {	
+				width:100%;
+				margin-top:20px;
+		     }
+		b {	
+				position:absolute;
+				width:100%;
+				outline:1px solid blue;
+				top:50%;
+		     }
+	</style>
+</head>
+<body>
+	<div id="" class="">
+		<span class="line-box1"><i></i><b></b><mark class="inline-box1">inline-box1</mark>x</span>
+		<span class="line-box2"><i></i><b></b><mark class="inline-box2">inline-box2</mark>x</span>
+	</div>
+	<div id="" class="">
+		<input type="range" max="100" min="-100" value="0" />
+		<input type="range" max="100" min="-100" value="0" />
+		<input type="range" max="150" value="16" />
+	</div>
+	<script type="text/javascript">
+	    var rge1 = $("input:first");
+	    var rge2 = $("input:eq(1)");
+	    var rge3 = $("input:eq(2)");
+		var mak1 = $(".inline-box1");
+		var mak2 = $(".inline-box2");
+		var osp = $("span");
+		rge1.bind("input",function (){
+			mak1.css("vertical-align",this.value+"px");
+		});
+		rge2.bind("input",function (){
+			mak2.css("vertical-align",this.value+"px");
+		});
+		rge3.bind("input",function (){
+			osp.css("font-size",this.value+"px");
+		});
+	</script>
+</body>
+</html>

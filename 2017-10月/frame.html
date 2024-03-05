@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Document</title>
+	<style type="text/css">
+		img {	
+				width:300px;
+		     }
+		ul {	
+				padding:0;
+				margin:auto;
+				position:relative;
+				height:400px;
+				outline:1px solid red;
+				overflow:hidden;
+				list-style:none;
+		     }
+		li {	
+				position:absolute;
+				transition:left 1s;
+		     }
+	</style>
+</head>
+<body>
+	<div id="" class="">
+		<ul>
+			<li><img src="fei/1.jpg" /></li>
+			<li><img src="fei/2.jpg" /></li>
+			<li><img src="fei/3.jpg" /></li>
+			<li><img src="fei/4.jpg" /></li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+	    var ul = document.querySelector("ul");
+		var Imgs = ul.querySelectorAll("li");
+		var ImgWidth = Imgs[0].offsetWidth;
+		var ImposeWidth = 100;
+		var len = Imgs.length;
+		ul.style.width = ImgWidth + ImposeWidth * (Imgs.length - 1) + "px";
+		function reset(){
+			for (i=1;i<len;i++ )
+			{
+				Imgs[i].style.left = ImgWidth + (i-1)*ImposeWidth + "px";
+			}
+		}
+			reset();
+		var translate = ImgWidth - ImposeWidth;
+		for (i=0;i < len;i++ )
+		{
+			(function(i){
+				Imgs[i].onmouseover = function (){
+					reset();
+					for (j=1;j<=i ;j++ )
+					{
+						Imgs[j].style.left = parseInt(Imgs[j].style.left,10)-translate + "px";
+					}
+				}
+			})(i)
+		}
+	</script>
+</body>
+</html>

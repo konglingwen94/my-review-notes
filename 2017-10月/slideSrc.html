@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		* {	
+				margin:0;
+				padding:0;
+		     }
+		body {	
+				text-align:center;
+				margin-top:5px;
+		     }
+		div.box {	
+				outline:1px solid red;
+				overflow:hidden;
+				width:400px;
+				height:530px;
+				position:relative;
+				margin:auto;
+				margin-bottom:10px;
+		     }
+		ul {	
+				position:absolute;
+				left:-400px;
+		     }
+		li {	
+				position:relative;
+				float:left;
+				height:530px;
+				overflow:hidden;
+		     }
+		img {	
+				width:400px;
+		     }
+		button {	
+				line-height:1.4;
+				padding:0 10px;
+				font-size:20px;
+		     }
+		li span {	
+				position:absolute;
+				bottom:0;
+				left:40%;
+				color:red;
+				font-size:26px;
+		     }
+		.btn2 {	
+				margin:10px 0;
+		     }
+		input {	
+				width:60%;
+		     }
+		.current {	
+				background-color:yellow;
+		     }
+		div.slide {	
+				height:100%;
+				opacity:1;
+				transition:all .4s;
+		     }
+		.slide span{	
+				position:absolute;
+				color:white;
+				font:45px "黑体";
+				width:40px;
+				cursor:pointer;
+				background-color:black;
+				opacity:0.3;
+				line-height:50px;
+				top:45%;
+		     }
+		.right {	
+				text-align-last:right;
+				right:0;
+		     }
+		.left {	
+				text-align-last:left;
+				left:0;
+		     }
+	</style>
+</head>
+<body>
+	<div id="" class="box">
+		
+		<ul>
+			<li><span>第五张</span><img src="pic/yun5.jpg" /></li>
+			<li><span>第一张</span><img src="pic/yun1.jpg" /></li>
+			<li><span>第二张</span><img src="pic/yun2.jpg" /></li>
+			<li><span>第三张</span><img src="pic/yun3.jpg" /></li>
+			<li><span>第四张</span><img src="pic/yun4.jpg" /></li>
+			<li><span>第五张</span><img src="pic/yun5.jpg" /></li>
+			<li><span>第一张</span><img src="pic/yun1.jpg" /></li>
+		</ul>
+		<div id="" class="slide">
+			<span class="left">&lt;</span>
+			<span class="right">&gt;</span>
+		</div>
+	</div>
+	</div>
+	<div class="btn1">
+	<button class="current">1</button>
+	<button>2</button>
+	<button>3</button>
+	<button>4</button>
+	<button>5</button></div>
+	<div class="btn2">
+	<button>左切</button>
+	<button>右切</button>
+	<button>暂停</button>
+	</div>
+	<input type="range" max="10000" >
+	<script type="text/javascript">
+	    var box = document.querySelector("div.box");
+		var ul = box.querySelector("ul");
+		var Li_s = ul.querySelectorAll("li") ;
+		var ImgWidth = Li_s[0].offsetWidth;
+		var span = +$("input").val();
+		var btns = $(".btn1 button");
+		var index = 0;
+		var len=$(".btn1 button").length;
+		ul.style.width = ImgWidth * Li_s.length + "px";
+		function removeClass(){
+			for (i=0;i<len ;i++ )
+			{
+				btns.eq(i).removeAttr("class");
+			}
+		}
+		function set(){
+			$(ul).stop(false,true);
+			left = $("ul").position().left;	
+			
+		}
+		
+		function slideNext(){
+			set();
+			index++;
+			removeClass();
+			btns.eq(index).attr("class","current");
+			if (left == -2000)
+			{
+				$(ul).animate({left: "-=" + ImgWidth},500).animate({left:-400},0);
+				index = 0;
+				btns.eq(index).attr("class","current");
+			}else{
+				$(ul).animate({left: "-=" + ImgWidth},500);
+			}
+		}
+		function slidePrev(){
+			 set();
+			 index--;
+			 removeClass();
+			 btns.eq(index).attr("class","current");
+			if (left == -400 || left < -2000)
+			{
+				$(ul).animate({left: "+=" + ImgWidth},500).animate({left:-2000},0);
+				index = -1;
+				btns.eq(index).attr("class","current");
+			}else{
+				$(ul).animate({left: "+=" + ImgWidth},500);
+			}
+		}
+		$("input").change(function (){
+			 val = +(this.value);
+		});
+		$(".left").click(slidePrev);
+		$(".right").click(slideNext);
+		$(".btn2 button:eq(0)").click();
+		$(".btn2 button:eq(1)").click();
+		$(".btn2 button:eq(2)").click();
+		for (var i = 0; i < len ; i++ )
+		{
+			(function(i){
+				btns[i].onclick = function (){
+					$(ul).stop(true).animate({left:-ImgWidth * (i+1)},500); 
+					removeClass();
+					btns.eq(i).attr("class","current");
+					index = i;
+				}
+			})(i)
+		}
+		$("div.box").mouseover(function (){
+		//	clear();
+			this.lastElementChild.style.opacity = 1;
+		});
+		$("div.box").mouseout(function (){
+		//	Next();
+			this.lastElementChild.style.opacity = 0;
+			console.log(this.lastElementChild)
+		});
+		
+	</script>
+</body>
+</html>

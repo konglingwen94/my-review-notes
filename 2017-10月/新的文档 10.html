@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		div {	
+				background-color:pink;
+				font-size:100px;
+				text-align:center;
+				position:relative;
+		     }
+		input:first-child {	
+				width:100%;
+		     }
+		p {	
+				position:absolute;
+				top:66%;
+				text-align:center;
+				width:98%;
+				font-family:microsoft yahei;
+		     }
+		input:not(first-child) {	
+				width:40px;
+				height:40px;
+				vertical-align:-14px;
+				cursor:pointer;
+		     }
+		mark.dib {	
+				display:inline-block;
+		     }
+	</style>
+</head>
+<body>
+   <div id="" class="">
+		<img src="1.jpg" width="240">zxx
+   </div>
+   <p><input type="range" max="400" value="320"><br><br>
+		<input type="radio" name="rdo" checked>baseline
+		<input type="radio" name="rdo">middle
+		<input type="radio" name="rdo">top
+		<input type="radio" name="rdo">text-top
+		<input type="radio" name="rdo">bottom
+		<input type="radio" name="rdo">text-bottom<br/><br>
+		<input type="checkbox" name="rdo">添加背景
+		<input type="checkbox" name="rdo">隐藏文字
+		<input type="checkbox" name="rdo">内联块状化
+		<input type="radio" name="rdo1" checked>Simsun
+		<input type="radio" name="rdo1">Yahei
+   </p>
+   <script type="text/javascript">
+       $("input").bind("input",function (){
+			$("img").attr("height",this.value);
+       });
+	   var rdo = $("input").not("input:first");
+	   var obj = {
+			0:function (){
+					$("img").css("vertical-align","baseline");
+			},
+			1:function (){
+					$("img").css("vertical-align","middle");
+			},
+			2:function (){
+					$("img").css("vertical-align","top");
+			},
+			3:function (){
+					$("img").css("vertical-align","text-top");
+			},
+			4:function (){
+					$("img").css("vertical-align","bottom");
+			},
+			5:function (){
+					$("img").css("vertical-align","text-bottom");
+			},
+			6:function (){
+				if (this.checked)
+				{
+					$("div").contents().last().replaceWith("<mark>zxx</mark>");
+					if (rdo[8].checked)
+					{
+						$("mark").addClass("dib");
+					}
+				}else{
+					$("div").contents().last().replaceWith("zxx");
+				}
+			},
+			7:function (){
+				if (this.checked)
+				{
+					$("div").css("text-align","left").contents().eq(2).remove();
+					$("img").css("margin-left","20.85202%");
+					rdo[6].disabled = true;
+				}else{
+					if (rdo[6].checked && rdo[8].checked)
+					{
+						$("div").append("<mark>zxx</mark>");
+						$("mark").addClass("dib");
+					}else if (rdo[6].checked)
+					{
+						$("div").append("<mark>zxx</mark>");
+					}else{
+						$("div").append("zxx");
+					}
+						rdo[6].disabled = false;
+				}
+			},
+			8:function (){
+				if (this.checked)
+				{
+					$("mark").addClass("dib");
+				}else{
+					$("mark").removeClass("dib");
+				}
+			},
+			9:function (){
+				$("div").css("font-family","simsun");
+			},
+			10:function (){
+				$("div").css("font-family","microsoft yahei");
+			},
+			bindEvent:function (){
+				for (i=0;i<rdo.length ;i++ )
+				{
+					rdo.eq(i).click(obj[i]);
+				}
+			}
+	   };
+			obj.bindEvent();
+   </script>
+</body>
+</html>

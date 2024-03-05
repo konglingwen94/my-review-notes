@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		div {	
+				background-color:pink;
+				position:relative;
+				height:300px;
+				font-size:200px;
+		     }
+		input[type="range"] {	
+				width:97%;
+				margin-bottom:10px;
+		     }
+		input[type="radio"],input[type="checkbox"] {	
+				width:30px;
+				height:30px;
+				vertical-align:middle;
+		     }
+		i {	
+				outline:2px dashed green;
+				display:inline-block;
+				height:100%;
+				margin-right:2px;
+				/* vertical-align:middle; */
+				/* font-style:normal; */
+		     }
+		p {	
+				position:absolute;
+				width:97%;
+				bottom:0;
+				text-align:center;
+				font-family:microsoft yahei;
+		     }
+		b {	
+				position:absolute;
+				outline:1px solid red;
+				top:50%;
+				width:100%;
+				left:0;
+				z-index:1;
+		     }
+		span {	
+				display:inline-block;
+				position:relative;
+				width:50%;
+				text-align:right;
+				vertical-align:middle;
+				font-size:0;
+		     }
+		s {	
+				display:inline-block;
+				position:absolute;
+				top:50%;
+				outline:1px solid blue;
+				width:100%;
+				left:40%;
+				z-index:1;
+		     }
+		img {	
+				margin-right:2px;
+		     }
+		mark {	
+				display:inline-block;
+		     }
+	</style>
+</head>
+<body>
+	<div id="" class=""><b></b>
+		<span class=""><s></s><img src="1.jpg" height="150"></span><i></i><mark>x<mark>
+	</div>
+	<p>
+		<input type="range" max="300" value="150" id="imgHeight" step=".5">
+		<input type="range" max="450" value="300" step=".5" id="lineHeight" >
+		<input type="range" max="300" value="200" id="fontSize" step=".5">
+		<input type="radio" name="rdo">top
+		<input type="radio" name="rdo">bottom
+		<input type="radio" name="rdo" checked>baseline
+		<input type="radio" name="rdo">text-top
+		<input type="radio" name="rdo">text-bottom
+		<input type="radio" name="rdo">middle
+		<input type="checkbox" checked>文本
+	</p>
+   <script type="text/javascript">
+		var obj = {
+			0:function (){
+					$("i").css("vertical-align","top")
+			},
+			1:function (){
+					$("i").css("vertical-align","bottom")
+			},
+			2:function (){
+					$("i").css("vertical-align","baseline")
+			},
+			3:function (){
+					$("i").css("vertical-align","text-top")
+			},
+			4:function (){
+					$("i").css("vertical-align","text-bottom")
+			},
+			5:function (){
+					$("i").css("vertical-align","middle")
+			},
+			imgHeight:function (){
+				$("img").attr("height",this.value);	
+			},
+			lineHeight:function (){
+				$("div").css("height",this.value+"px");	
+			},
+			fontSize:function (){
+				$("div").css("fontSize",this.value+"px");	
+			},
+			bendEvent:function (){
+				 rdo = $("input[type='radio']");
+				 rge = $("input[type='range']");
+				 ckb = $("input[type='checkbox']");
+				for (i=0;i < rdo.length  ;i++ )
+				{
+					rdo.eq(i).click(obj[i]);
+				}
+				for (n=0; n<rge.length; n++)
+				{
+					rge.eq(n).bind("input",obj[rge[n].id] )
+				}
+				ckb.click(function (){
+				if (this.checked)
+				{
+					$("div").append("<mark>x</mark>");
+				}else{
+					$("mark").remove();
+				}
+			});
+			}
+		};
+		obj.bendEvent();
+   </script>
+</body>
+</html>

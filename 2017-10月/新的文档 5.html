@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		div {
+				outline:1px solid red;
+				text-align-last:justify;
+				position:relative;
+				font-size:100px;
+				/* line-height:100px; */
+		     }
+		span.parent {	
+				font-size:50px;
+				width:300px;
+				/* line-height:0; */
+				background-color:lightgray;
+		     }
+		img {	
+				/* vertical-align:middle; */
+		     }
+		input[type="range"]{	
+				width:100%;
+		     }
+		input[type="radio"]{	
+				width:40px;
+				height:40px;
+				vertical-align: -13px;
+		     }
+		p {	
+				position:absolute;
+				bottom:10px;
+				width:98%;
+				text-align:center;
+				font-family:microsoft yahei;
+		     }
+		i,b,s {	
+				position:absolute;
+				outline:1px solid red;
+				width:100%;
+				left:0;
+				z-index:1;
+		     }
+		i {	
+				top:33.334%;
+		     }
+		b {	
+				top:66.667%;
+		     }
+		span.child {	
+				position:relative;
+				display:inline-block;
+		     }
+		u,s {	
+				width:300px;
+				outline:1px dashed blue;
+				position:absolute;
+				bottom:40%;
+				left:-100px
+		     }
+		s {	
+				outline-color:green;
+				bottom:19.5%;
+		     }
+	</style>
+</head>
+<body>
+	<div id="" class=""><i></i><b></b>
+		<span class="parent">文字x<br>文字x<br>文字x</span><span class="child"><u></u><s></s><mark>x</mark></span><img src="1.jpg" height="50">
+	</div>
+	<p>
+		<input type="range" max="140" value="100">
+		<input type="radio" name="rdo" checked>baseline
+		<input type="radio" name="rdo">top
+		<input type="radio" name="rdo">bottom
+		<input type="radio" name="rdo">middle
+		<input type="radio" name="rdo">text-top
+		<input type="radio" name="rdo">text-bottom
+	</p>
+	<script type="text/javascript">
+	    $("input").bind("input",function (){
+			$("div").css("font-size",this.value+"px");
+	    });
+		var rdo = $("input[type='radio']");
+		var osp = $("span.parent");
+		var obj = {
+			0:function (){
+					osp.css("vertical-align","baseline");
+			},
+			1:function (){
+					osp.css("vertical-align","top");
+			},
+			2:function (){
+					osp.css("vertical-align","bottom");
+			},
+			3:function (){
+					osp.css("vertical-align","middle");
+			},
+			4:function (){
+					osp.css("vertical-align","text-top");
+			},
+			5:function (){
+					osp.css("vertical-align","text-bottom");
+			},
+			bindEvent:function (){
+				for (i=0;i<rdo.length ;i++ )
+				{
+					rdo[i].onclick = obj[i];
+				}
+			}
+		};
+		obj.bindEvent();
+	</script>
+</body>
+</html>

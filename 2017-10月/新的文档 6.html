@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		* {	
+				font-family:microsoft yahei;
+		     }
+		p {	
+				background-color:lightgray;
+				font-size:100px;
+				position:relative;
+				margin:20px 0;
+		     }
+		i {	
+				position:absolute;
+				outline:1px solid red;
+				width:100%;
+				top:132px;
+		     }
+		div.contain {	
+				height:450px;
+		     }
+		input[type="range"] {	
+				width:100%;
+				margin-bottom: 20px;
+		     }
+		[name="rdo"] {	
+				width:40px;
+				height:40px;
+				vertical-align:middle;
+		     }
+		div.box {	
+				text-align:center;
+		     }
+		mark {	
+				font-family:simsun;
+				display:inline-block;
+				width:150px;
+				height:114px;
+		     }
+	</style>
+</head>
+<body>
+   <div id="" class="contain">
+		<p><i></i><img src="1.jpg" width="240"><mark>xxx</mark>x</p>
+   </div>
+   <div id="" class="box">
+	<input type="range" max="320" value="320">
+	<input type="radio" name="rdo" checked>baseline
+	<input type="radio" name="rdo">top
+	<input type="radio" name="rdo">bottom
+	<input type="radio" name="rdo">middle
+	<input type="radio" name="rdo">text-top
+	<input type="radio" name="rdo">text-bottom
+	<input type="checkbox" name="rdo">
+   </div>
+   <script type="text/javascript">
+       $("input").bind("input",function (){
+			$("img").attr("height",this.value);
+       });
+	   var obj = {
+			0:function (){
+					$("img").css("vertical-align","baseline");
+			},
+			1:function (){
+					$("img").css("vertical-align","top");
+			},
+			2:function (){
+					$("img").css("vertical-align","bottom");	
+			},
+			3:function (){
+					$("img").css("vertical-align","middle");
+			},
+			4:function (){
+					$("img").css("vertical-align","text-top");
+			},
+			5:function (){
+					$("img").css("vertical-align","text-bottom");
+			},
+			6:function (){
+				if (this.checked)
+				{
+					$("mark").empty();
+				}else{
+					$("mark").append("xxx");
+				}
+			},
+			bindEvent:function (){
+				for (i=0;i<$("[name='rdo']").length ;i++ )
+				{
+					$("[name='rdo']")[i].onclick = obj[i];
+				}
+			}
+	   };
+		obj.bindEvent();
+   </script>
+</body>
+</html>

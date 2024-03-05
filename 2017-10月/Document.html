@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		div {	
+				background-color:pink;
+				vertical-align:middle;
+				font-size:300px;
+				line-height:0;
+				margin-top:150px;
+				position:relative;
+		     }
+		.box span {	
+				position:relative;
+		     }
+		.box {	
+				background-color:yellow;
+				position:relative;
+				display:inline-block;
+				width:300px;
+		     }
+		i,b,u,s,em{	
+				position:absolute;
+				display:inline-block;
+				outline:1px dashed ;
+				width:700px;
+				left:0;
+		     }
+		i {	
+				top:0;
+				outline-color:red;
+		     }
+		em {	
+				top:50%;
+				outline:1px solid;
+		     }
+		b {	
+				outline:1px dashed blue;
+				bottom:0;
+		     }
+		u {	
+				outline:1px dashed green;
+				bottom:36.5%;
+		     }
+		s {	
+				outline:1px dashed purple;
+				bottom:14%;
+		     }
+		p {	
+				position:absolute;
+				bottom:0;
+				width:97%;
+				text-align:center;
+		     }
+		[type="range"] {	
+				margin-bottom:12px;
+				width:100%;
+		     }
+		[type="checkbox"] {	
+				width:40px;
+				height:40px;
+				vertical-align: -9px;
+		     }
+		img {	
+				/* display:none; */
+		     }
+		select{	
+				font-size:30px;
+				text-align:center;
+				width:250px;
+		     } 
+		[type="number"] {	
+				font-size:30px;
+		     }
+	</style>
+</head>
+<body>
+   <div>
+		<span class="box"><em></em><span>x<i></i><b></b><u></u><s></s>&nbsp;</span></span><img src="1.jpg" width="100">
+   </div>
+   <p>
+		<input type="range" max="300" value="300" >
+		<input type="range" max="400" value="0" />
+		<input type="checkbox" name="ckb">
+		<input type="checkbox" name="ckb">
+		<input type="checkbox" name="ckb">
+		<select name="">
+			<option>baseline</option>
+			<option>top</option>
+			<option>text-top</option>
+			<option>bottom</option>
+			<option>text-bottom</option>
+			<option>middle</option>
+			<option>-webkit-baseline-middle</option>
+		</select>
+		<input type="number" max="300" value="133" min="0">
+		<input type="checkbox" name="">
+   </p>
+   <script type="text/javascript">
+       $("input:eq(0)").bind("input",function (){
+			$("div").css("font-size",this.value+"px");
+       });
+       $("input:eq(1)").bind("input",function (){
+			$("div").css("line-height",this.value+"px");
+       });
+       $("input:eq(2)").bind("click",function (){
+			if (this.checked)
+			{
+				$("div").css("font-family","microsoft yahei");
+				$("u").css("bottom","40.2%");
+				$("s").css("bottom","19.6%");
+			}else{
+				$("div").css("font-family","simsun");
+				$("u").css("bottom","36.5%");
+				$("s").css("bottom","14%");
+			}
+       });
+       $("input:eq(3)").bind("click",function (){
+			if (this.checked)
+			{
+				$(".box span").contents().first()[0].textContent="";
+				$(".box").css("background","transparent")
+			}else{
+				$(".box span").contents().first()[0].textContent="x";
+				$(".box").css("background","yellow")
+			}
+       });
+	   $("input:eq(4)").click(function (){
+			if (this.checked)
+			{
+				em = $("em").remove();
+			}else{
+				$("span.box").prepend(em);
+			}
+	   });
+	   $("input:eq(6)").click(function (){
+			if (this.checked)
+			{
+				osp = $("span.box").remove();
+				$("div").css("text-align","center");
+				ckb = $("[name='ckb']").attr("disabled",true);
+			}else{
+				$("img").before(osp);
+				$("div").css("text-align","");
+				ckb.attr("disabled",false);
+			}
+	   });
+	   $("select").change(function (){
+			$("img").css("vertical-align",this.value);
+	   });
+	   $("input:eq(5)").bind("input",function (){
+			$("img").attr("height",this.value);
+	   });
+   </script>
+</body>
+</html>

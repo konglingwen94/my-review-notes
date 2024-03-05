@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		div {	
+				background-color:pink;
+				font-size:200px;
+				/* font-family:microsoft yahei; */
+				text-align:center;
+				margin-top:130px;
+				position:relative;
+		     }
+		input:first-child {	
+				width:660px;
+		     }
+		i {	
+				position:absolute;
+				width:100%;
+				outline:1px solid red;
+				top:50%;
+				left:0;
+		     }
+		input[name="rdo"] {	
+				height:40px;
+				width:40px;
+				vertical-align:-12px;
+				margin-right:10px;
+				cursor:pointer;
+		     }
+		p {	
+				text-align:center;
+				font-family:microsoft yahei;
+				position:absolute;
+				bottom:50px;
+		     }
+		p span {	
+				margin:0 10px;
+				font-size:20px;
+		     }
+	</style>
+</head>
+<body>
+	<div id="" class="">
+		<i></i>spinx-
+	</div>
+	<p><input type="range" max="300" value="228"><br><br>
+	<span class=""><input type="radio" name="rdo" checked>Simsun</span> 
+	<span class=""><input type="radio" name="rdo">Yahei</span>
+	<span class=""><input type="radio" name="rdo">Arial</span>
+	<span class=""><input type="radio" name="rdo">Kati</span>
+	<span class=""><input type="checkbox" name="rdo">背景</span>
+	</p>
+	<script type="text/javascript">
+		var rge = $("input");
+	    rge.bind("input",function (){
+			$("div").css("line-height",this.value+"px");
+	    });
+		rge.change(function (){
+			return val = this.value;
+		});
+		var obj = {
+			0:function (){
+					$("div").css("font-family","simsun");
+			},
+			1:function (){
+					$("div").css("font-family","microsoft yahei");
+			},
+			2:function (){
+					$("div").css("font-family","Arial");
+			},
+			3:function (){
+					$("div").css("font-family","kaiti");
+			},
+			4:function (){
+				odv = $("div")[0];
+				if (this.checked)
+				{
+					$(odv.lastChild).replaceWith("<mark>spinx-</mark>");
+				}else{
+					$(odv.lastChild).replaceWith("spinx-");	
+				}
+			},
+			bindEvent:function (){
+				rdo = $("input[name='rdo']");
+				for (i=0;i< rdo.length;i++ )
+				{
+					rdo.eq(i).click(obj[i]);
+				}
+				rdo.not("input[type='checkbox']").click(function (){
+					$("div").css("line-height","normal");
+					rge.val($("div").height());
+				});
+			}
+		};
+		obj.bindEvent();
+		
+	</script>
+</body>
+</html>

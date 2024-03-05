@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+		img {	
+				width:300px;
+		     }
+		.toggle,.index {	
+				text-align:center;
+				margin-top:10px;
+		     }
+		button {	
+				font-size:22px;
+		     }
+		li {	
+				position:relative;	
+				height:400px;
+				overflow:hidden;
+		     }
+		li span {	
+				position:absolute;
+				bottom:0;
+				left:40%;
+				color:red;
+				font-size:26px;
+		     }
+		ul {	
+				margin:auto;
+				padding:0;
+				width:300px;
+				height:400px;
+				overflow:hidden;
+		     }
+	</style>
+</head>
+<body>
+	<ul>
+		<li><span>第一张</span><img src="pic/1.jpg" /></li>
+		<li><span>第二张</span><img src="pic/2.jpg" /></li>
+		<li><span>第三张</span><img src="pic/3.jpg" /></li>
+		<li><span>第四张</span><img src="pic/4.jpg" /></li>
+		<li><span>第五张</span><img src="pic/5.jpg" /></li>
+	</ul>
+	<div id="" class="toggle">
+		<button>prev</button>
+		<button>next</button>
+	</div>
+	<div id="" class="index">
+		<button style="background:yellow">1</button>
+		<button>2</button>
+		<button>3</button>
+		<button>4</button>
+		<button>5</button>
+	</div>
+	<script type="text/javascript">
+		var imgs = $("li");
+		var btns = $(".index > button");
+		var a = 0;
+		var wrap = $(".wrap").get(0);
+		function hideAll(){
+				for (i = 0;i < imgs.length ;i++ )
+			{
+				imgs.eq(i).css("display","none");
+				btns.eq(i).css("background","");
+			}
+		}
+		function Add(i){
+			imgs.eq(i).css("display","inline-block");
+			btns.eq(i).css("background","yellow");	
+		}
+		
+		$("button").get(1).onclick = function (){
+			hideAll();
+			if (a == imgs.length-1)
+			{
+				a = 0;
+			}else{
+				a++;
+			}
+				Add(a);
+		}
+		$("button").get(0).onclick = function (){
+			hideAll();
+			if (a == 0)
+			{
+				a = imgs.length-1;
+			}else{
+				a--;
+			}
+				Add(a);
+		}
+		for (i = 0;i < btns.length ; i++)
+		{
+			(function(i){
+				btns.get(i).onclick = function (){
+					hideAll();
+					Add(i);
+					a = i;
+				}
+			})(i)
+		}
+	</script>
+</body>
+</html>
